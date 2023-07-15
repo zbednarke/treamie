@@ -17,6 +17,23 @@ const ROOT_HEIGHT = 1200
 
 func main() {
 
+	inspect_dir("/Users/zacharybednarke/projects/treamie")
+
+	visualize_quadtree_test(false)
+}
+
+func inspect_dir(dir string) {
+	ignoreList := []string{
+		".git",
+	}
+	fileinfos, err := package1.TraverseDirectory(dir, ignoreList)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(fileinfos)
+}
+
+func visualize_quadtree_test(plot bool) {
 	rectangles := gen_all_rectangles()
 
 	// Generate the treemap using the GenerateTreeMap function from the package1 package
@@ -40,6 +57,9 @@ func main() {
 	log.Println("Image generated and saved as image.png")
 
 	// Open the generated image using the default image viewer
+	if !plot {
+		return
+	}
 	err = openImage("image.png")
 	if err != nil {
 		log.Fatal(err)
